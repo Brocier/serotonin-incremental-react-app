@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
-
+import SimpleStorage from "react-simple-storage";
 import netlifyIdentity from 'netlify-identity-widget'
 
 class App extends Component {
@@ -23,7 +23,9 @@ class App extends Component {
 
     // setInterval(this.addClick, 1000);
   }
+
   addClick() {
+    const clickValue = (this.state.clicks + 1).toString()
     this.setState(state => ({
       clicks: state.clicks + 1
     }));
@@ -32,25 +34,26 @@ class App extends Component {
     // You can import the widget into any component and interact with it.
     netlifyIdentity.open()
   }
+
   render() {
     return (
       <div className="App">
+        <SimpleStorage parent={this}/>
         <header className="App-header">
 
           <div>
-            <button onClick={this.handleLogIn}>Log in with netlify</button>
+            {/* <button onClick={this.handleLogIn}>Log in with netlify</button> */}
           </div>
-          {/* <div data-netlify-identity-menu></div>
-          <div data-netlify-identity-button>Login with Netlify Identity</div> */}
 
-          <p className="Super-center">Serotonin
+          <div className="Super-center">Serotonin
             <img
               src={window.location.origin + '/img/serotonin-white-outline.png'}
               alt="serotonin-white-outline"
               className="Main-logo"/>
-            Incremental</p>
-          <p>You have clicked {this.state.clicks}
-            &nbsp;times.</p>
+            Incremental</div>
+
+          <div>You have clicked {this.state.clicks}
+            &nbsp;times.</div>
           <button onClick={this.addClick}>+1</button>
         </header>
       </div>
